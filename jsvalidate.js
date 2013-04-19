@@ -41,8 +41,7 @@
  *          }
  * @return boolean false is Validation fails, the value if validation succeeds
  */
-define([], function () {
-
+(function(){
     var validate = {
         validate: function(val, permissions) {
             var allowEmpty = null;

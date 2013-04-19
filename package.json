@@ -2,10 +2,22 @@
   "name": "jsvalidate",
   "version": "0.5.0",
   "private": false,
-  "dependencies": {
-    
-  },
+  "dependencies": {},
   "readmeFilename": "README.md",
   "author": "Christopher Mina",
-  "license": "BSD"
+  "license": "BSD",
+  "gitHead": "c1f0c223ddd6ddf58579007650bbf3d6d2832224",
+  "description": "jsvalidate ==========",
+  "main": "jsvalidate.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/christophermina/jsvalidate.git"
+  },
+  "keywords": [
+    "Javascript",
+    "validation"
+  ]
 }
