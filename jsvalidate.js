@@ -45,13 +45,13 @@
     var validate = {
         validate: function(val, permissions) {
             var allowEmpty = null;
-            if (permissions.required !== null) {
+            if (permissions.required != null) {
                 allowEmpty = !permissions.required;
             } else {
                 allowEmpty = permissions.empty;
             }
 
-            if (allowEmpty === null) {
+            if (allowEmpty == null) {
                 allowEmpty = false;
             }
 
@@ -89,7 +89,7 @@
 
 
             var value = val;
-            if (value === null || value === "") {
+            if (value == null || value === "") {
                 if (allowEmpty === true) {
                     if (isDate || isNumber || isInteger) {
                         return {success:true, value:null};
@@ -118,7 +118,7 @@
                 }
 
                 match = value.match(regexp);
-                if (match !== null) {
+                if (match != null) {
                     var i;
                     if (isInteger === true) {
                         i = parseInt(match[0], 10);
@@ -128,11 +128,11 @@
                     }
 
 
-                    if (min !== null && i < min) {
+                    if (min != null && i < min) {
                         errorTip = "Value must be greater than or equal to " + min;
                         return {success:false, msg:errorTip};
 
-                    }else if (max !== null && i > max) {
+                    }else if (max != null && i > max) {
                         errorTip = "Value must be less than or equal to " + max;
                         return {success:false, ms:errorTip};
                     }
@@ -148,15 +148,15 @@
                 regexp = new RegExp(/(^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]( )?\d[ABCEGHJKLMNPRSTVWXYZ]\d$)|(^\d{5}(-\d{4})?$)/);
             }
             if (isString === true) {
-                if (min !== null && value.length < min) {
+                if (min != null && value.length < min) {
                     errorTip = "Value must be longer than " + min;
                     return {success:false, msg:errorTip};
                 }
-                else if (max !== null && value.length > max) {
+                else if (max != null && value.length > max) {
                     errorTip = "Value must be shorter than " + max;
                     return {success:false, msg:errorTip};
                 }
-                if (permissions.values !== null) {
+                if (permissions.values != null) {
                     if (permissions.values.indexOf(value) > -1) {
                         return {success:true, value:value};
                     } else {
@@ -164,22 +164,22 @@
                     }
                 }
 
-                if (permissions.regexp !== null) {
+                if (permissions.regexp != null) {
                     regexp = permissions.regexp;
                 }
 
-                if (permissions.invalidRegexp !== null) {
+                if (permissions.invalidRegexp != null) {
                     regexp_invalid = permissions.invalidRegexp;
                 }
 
-                if (regexp_invalid !== null) {
+                if (regexp_invalid != null) {
                     isValid = regexp_invalid.test(value);
                     if (isValid === true) {
                         return {success:false, msg:errorTip};
                     }
                 }
 
-                if (regexp !== null) {
+                if (regexp != null) {
                     isValid = regexp.test(value);
 
                     if (isValid !== true) {
@@ -198,10 +198,10 @@
                 } else {
                     date = new Date(date);
 
-                    if (min !== null && date < min) {
+                    if (min != null && date < min) {
                         errorTip = "You must enter a date after " + min.toLocaleDateString();
                         return {success:false, msg:errorTip};
-                    } else if (max !== null && date > max) {
+                    } else if (max != null && date > max) {
                         errorTip = "You must enter a date before " + max.toLocaleDateString();
                         return {success:false, msg:errorTip};
                     }

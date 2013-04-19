@@ -63,17 +63,17 @@ define([], function () {
         var errorText = permissions.errorText;
 
         var allowEmpty = null;
-        if (permissions.required !== null) {
+        if (permissions.required != null) {
             allowEmpty = !permissions.required;
         } else {
             allowEmpty = permissions.empty;
         }
 
-        if (allowEmpty === null) {
+        if (allowEmpty == null) {
             allowEmpty = false;
         }
 
-        if (errorClass === null) {
+        if (errorClass == null) {
             errorClass = "error";
         }
 
@@ -87,7 +87,7 @@ define([], function () {
         var isZip = permissions.zip === true;
 
         var isValid;
-        if (errorTip === null) {
+        if (errorTip == null) {
             if (allowEmpty) {
                 errorTip = "A valid value must be supplied.";
             } else {
@@ -109,12 +109,12 @@ define([], function () {
             }
         }
 
-        if (errorText === null) {
+        if (errorText == null) {
             errorText = errorTip;
         }
 
         var value = $(this).val();
-        if (value === null || value === "") {
+        if (value == null || value === "") {
             if (allowEmpty === true) {
                 this._removeError(errorClass, errorClassSelector, errorTextClassSelector);
                 if (isDate || isNumber || isInteger) {
@@ -145,7 +145,7 @@ define([], function () {
             }
 
             match = value.match(regexp);
-            if (match !== null) {
+            if (match != null) {
                 var i;
                 if (isInteger === true) {
                     i = parseInt(match[0], 10);
@@ -155,15 +155,15 @@ define([], function () {
                 }
 
 
-                if (min !== null && i < min) {
-                    if (permissions.errorText === null) {
+                if (min != null && i < min) {
+                    if (permissions.errorText == null) {
                         errorText = "Value must be greater than or equal to " + min;
                     }
                     this._addError("Value must be greater than or equal to " + min, errorClass, errorClassSelector, errorTextClassSelector, errorText);
                     return false;
                 }
-                else if (max !== null && i > max) {
-                    if (permissions.errorText === null) {
+                else if (max != null && i > max) {
+                    if (permissions.errorText == null) {
                         errorText = "Value must be less than or equal to " + max;
                     }
                     this._addError("Value must be less than or equal to " + max, errorClass, errorClassSelector, errorTextClassSelector, errorText);
@@ -183,15 +183,15 @@ define([], function () {
             regexp = new RegExp(/(^[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ]( )?\d[ABCEGHJKLMNPRSTVWXYZ]\d$)|(^\d{5}(-\d{4})?$)/);
         }
         if (isString === true) {
-            if (min !== null && value.length < min) {
+            if (min != null && value.length < min) {
                 this._addError("Value must be longer than " + min, errorClass, errorClassSelector, errorTextClassSelector, errorText);
                 return false;
             }
-            else if (max !== null && value.length > max) {
+            else if (max != null && value.length > max) {
                 this._addError("Value must be shorter than " + max, errorClass, errorClassSelector, errorTextClassSelector, errorText);
                 return false;
             }
-            if (permissions.values !== null) {
+            if (permissions.values != null) {
                 if (permissions.values.indexOf(value) > -1) {
                     this._removeError(errorClass, errorClassSelector, errorTextClassSelector);
                     return value;
@@ -201,15 +201,15 @@ define([], function () {
                 }
             }
 
-            if (permissions.regexp !== null) {
+            if (permissions.regexp != null) {
                 regexp = permissions.regexp;
             }
 
-            if (permissions.invalidRegexp !== null) {
+            if (permissions.invalidRegexp ) {
                 regexp_invalid = permissions.invalidRegexp;
             }
 
-            if (regexp_invalid !== null) {
+            if (regexp_invalid != null) {
                 isValid = regexp_invalid.test(value);
                 if (isValid === true) {
                     this._addError(errorTip, errorClass, errorClassSelector, errorTextClassSelector, errorText);
@@ -217,7 +217,7 @@ define([], function () {
                 }
             }
 
-            if (regexp !== null) {
+            if (regexp != null) {
                 isValid = regexp.test(value);
 
                 if (isValid !== true) {
@@ -239,11 +239,11 @@ define([], function () {
             } else {
                 date = new Date(date);
 
-                if (min !== null && date < min) {
+                if (min != null && date < min) {
                     errorText = errorTip = "You must enter a date after " + min.toLocaleDateString();
                     this._addError(errorTip, errorClass, errorClassSelector, errorTextClassSelector, errorText);
                     return false;
-                } else if (max !== null && date > max) {
+                } else if (max != null && date > max) {
                     errorText = errorTip = "You must enter a date before " + max.toLocaleDateString();
                     this._addError(errorTip, errorClass, errorClassSelector, errorTextClassSelector, errorText);
                     return false;
@@ -299,26 +299,26 @@ define([], function () {
 
 
     jQuery.fn._addError = function (errorTip, errorClass, selector, errorTipSelector, errorText) {
-        if (errorClass === null) {
+        if (errorClass == null) {
             errorClass = "error";
         }
-        if (errorTipSelector === null) {
+        if (errorTipSelector == null) {
             errorTipSelector = ".help-inline";
         }
         //Move original title to _title, and set errorTip to title
         this._moveAttribute("title", "_title");
         this.attr("title", errorTip);
 
-        if (selector === null) {
+        if (selector == null) {
             this.addClass(errorClass);
         } else {
             var ancestor = this.closest(selector);
-            if (ancestor !== null) {
+            if (ancestor != null) {
                 ancestor.addClass(errorClass);
             }
         }
 
-        if (errorTipSelector !== null) {
+        if (errorTipSelector != null) {
             if (errorTipSelector.charAt(0) === "#") {
                 $(errorTipSelector).html(errorText).addClass("error-text").show();
             } else {
@@ -342,25 +342,25 @@ define([], function () {
 
 
     jQuery.fn._removeError = function (errorClass, selector, errorTipSelector) {
-        if (errorClass === null) {
+        if (errorClass == null) {
             errorClass = "error";
         }
-        if (errorTipSelector === null) {
+        if (errorTipSelector == null) {
             errorTipSelector = ".help-inline";
         }
         //move original title, now stored in _title, back to title property
         this._moveAttribute("_title", "title");
 
-        if (selector === null) {
+        if (selector == null) {
             this.removeClass(errorClass);
         } else {
             var ancestor = this.closest(selector);
-            if (ancestor !== null) {
+            if (ancestor != null) {
                 ancestor.removeClass(errorClass);
             }
         }
 
-        if (errorTipSelector !== null) {
+        if (errorTipSelector != null) {
             if (errorTipSelector.charAt(0) === "#") {
                 $(errorTipSelector).html("").removeClass("error-text").hide();
             } else {
@@ -388,7 +388,7 @@ define([], function () {
 
     jQuery.fn._moveAttribute = function (currAttributeName, newAttributeName) {
         var old = this.attr(currAttributeName);
-        if (old !== null) {
+        if (old != null) {
             this.attr(newAttributeName, old);
         } else {
             this.removeAttr(newAttributeName);
