@@ -5,6 +5,7 @@
   "dependencies": {
     
   },
+  "main": "jsvalidate.js",
   "readmeFilename": "README.md",
   "author": "Christopher Mina",
   "license": "BSD"
