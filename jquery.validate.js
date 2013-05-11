@@ -1,5 +1,5 @@
 /* ===================================================
- * jquery.validate.js v1.0.0
+ * jquery.validate.js v1.0.1
  * ===================================================
  * Copyright 2012 Christopher Mina
  *
@@ -21,6 +21,8 @@
  *
  * @param permissions The validation object, accepts several paramaters:
  *          {
+ *		 		useHtml                 : null,      -- true|false|null - Determines if we use .html() or .val() to get
+ *                                                          the value to be validated
  *              required                : null,     -- true|false|null
  *              errorTip                : ""        -- The text to set the tooltip of the element to
  *                                                      in case of failure, default is context sensitive
@@ -113,7 +115,13 @@ define([], function () {
             errorText = errorTip;
         }
 
-        var value = $(this).val();
+        var value;
+        if (permissions.useHtml == true) {
+            value = $(this).html();
+        } else {
+            value = $(this).val();
+        }
+        
         if (value == null || value === "") {
             if (allowEmpty === true) {
                 this._removeError(errorClass, errorClassSelector, errorTextClassSelector);
