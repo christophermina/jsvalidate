@@ -38,6 +38,7 @@
  *              email : null       -- Validates the value as an email
  *              phone : null       -- Validates the value as a phone number and formats the number
  *                  allowInternational : null -- If true, allows both 10 digit us, and international numbers
+ *				ip : null 			-- Validates the value as an IPV4 IP Address
  *          }
  * @return boolean false is Validation fails, the value if validation succeeds
  */
@@ -63,6 +64,7 @@
             var isPhone = permissions.phone === true;
             var allowInternational = permissions.allowInternational === true;
             var isZip = permissions.zip === true;
+            var isIP = permissions.ip === true;
 
             var isValid;
             var errorTip;
@@ -85,6 +87,8 @@
                 } else {
                     errorTip = "A valid 10 digit number is required.";
                 }
+            } else if (isIP === true) {
+            	errorTip = "A valid IP Address must be supplied";
             }
 
 
@@ -233,6 +237,14 @@
                     }
                 }
                 return {success:false, msg:errorTip};
+            }
+            
+            if (isIP === true) {
+            	var ipRegExp = new RegExp(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/);
+            	if (ipRegExp.test(value) === true) {
+            		return {success:true, value:value};
+            	}
+            	return {success:false, msg:errorTip};
             }
 
             return {success:true, value:value};
